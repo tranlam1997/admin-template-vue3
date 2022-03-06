@@ -1,0 +1,57 @@
+<app-dropdown class="user-menu">
+    <template v-slot:dropdown-button>
+        <img
+            :src="(user && user.picture) ? user.picture : require('@/assets/img/default-profile.png')"
+            class="user-image img-circle elevation-2"
+            alt="User Image"
+        />
+    </template>
+    <template v-slot:dropdown-menu>
+        <li class="user-header bg-primary">
+            <img
+                :src="(user && user.picture) ? user.picture : require('@/assets/img/default-profile.png')"
+                class="img-circle elevation-2"
+                alt="User Image"
+            />
+
+            <p>
+                <span>{{user && user.email}}</span>
+                <small>
+                    <span>{{ $t("labels.memberSince") }}&nbsp;</span>
+                    <span>{{readableCreatedAtDate}}</span>
+                </small>
+            </p>
+        </li>
+        <!-- Menu Body -->
+        <li class="user-body">
+            <div class="row">
+                <div class="col-4 text-center">
+                    <a href="#">{{ $t("labels.followers") }}</a>
+                </div>
+                <div class="col-4 text-center">
+                    <a href="#">{{ $t("labels.sales") }}</a>
+                </div>
+                <div class="col-4 text-center">
+                    <a href="#">{{ $t("labels.friends") }}</a>
+                </div>
+            </div>
+            <!-- /.row -->
+        </li>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <router-link
+                to="/profile"
+                class="btn btn-default btn-flat"
+                @click="isDropdownOpened = false;"
+            >
+                {{ $t("labels.profile") }}
+            </router-link>
+            <button
+                @click="logout"
+                class="btn btn-default btn-flat float-right"
+            >
+                {{ $t("labels.signOut") }}
+            </button>
+        </li>
+    </template>
+</app-dropdown>

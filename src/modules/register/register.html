@@ -1,0 +1,88 @@
+<div class="register-box">
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <router-link to="/" class="h1"><b>Admin</b>LTE</router-link>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">{{ $t("labels.registerMembership") }}</p>
+
+            <form @submit.prevent="registerByAuth">
+                <app-input
+                    icon="envelope"
+                    class="mb-3"
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="off"
+                    v-model="email"
+                />
+                <app-input
+                    icon="lock"
+                    class="mb-3"
+                    type="password"
+                    placeholder="Password"
+                    autocomplete="off"
+                    v-model="password"
+                />
+                <app-input
+                    icon="lock"
+                    class="mb-3"
+                    type="password"
+                    placeholder="Retype password"
+                    autocomplete="off"
+                    v-model="rePassword"
+                />
+                <div class="row">
+                    <div class="col-7">
+                        <app-checkbox type="icheck" v-model="agreeTerms">
+                            {{ $t("labels.iAgree") }}
+                            <a href="#">{{ $t("labels.terms") }}</a>
+                        </app-checkbox>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-5">
+                        <app-button
+                            class="btn-primary"
+                            type="submit"
+                            block="true"
+                            :loading="isAuthLoading"
+                            :disabled="isFacebookLoading || isGoogleLoading"
+                        >
+                            {{ $t("labels.register") }}
+                        </app-button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <div class="social-auth-links text-center">
+                <app-button
+                    class="btn-primary"
+                    icon="facebook"
+                    block="true"
+                    @click="registerByFacebook"
+                    :loading="isFacebookLoading"
+                    :disabled="isAuthLoading || isGoogleLoading"
+                >
+                    {{ $t("labels.signUpUsingFB") }}
+                </app-button>
+                <app-button
+                    class="btn-danger"
+                    icon="google-plus"
+                    block="true"
+                    @click="registerByGoogle"
+                    :loading="isGoogleLoading"
+                    :disabled="isAuthLoading || isFacebookLoading"
+                >
+                    {{ $t("labels.signUpUsingGoogle") }}
+                </app-button>
+            </div>
+
+            <router-link to="/login" class="text-center">
+                {{ $t("labels.alreadyHaveMembership") }}
+            </router-link>
+        </div>
+        <!-- /.form-box -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.register-box -->
